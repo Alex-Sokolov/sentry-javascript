@@ -209,8 +209,8 @@ export class BrowserTracing implements Integration {
     }
 
     const hub = this._getCurrentHub();
-    const idleTransaction = startIdleTransaction(hub, finalContext, idleTimeout, true);
     logger.log(`[Tracing] Starting ${finalContext.op} transaction on scope`);
+    const idleTransaction = startIdleTransaction(hub, finalContext, idleTimeout, true);
     idleTransaction.registerBeforeFinishCallback((transaction, endTimestamp) => {
       this._metrics.addPerformanceEntries(transaction);
       adjustTransactionDuration(secToMs(maxTransactionDuration), transaction, endTimestamp);
